@@ -1,5 +1,4 @@
 import { Component } from 'react';
-
 import { Form, Input, Label, AddButton } from './ContactForm.styled';
 
 export default class ContactForm extends Component {

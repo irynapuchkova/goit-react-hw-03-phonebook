@@ -1,8 +1,6 @@
 import 'normalize.css';
 import PropTypes from 'prop-types';
 
-import React from 'react';
-
 import ContactItem from 'Components/ContactItem/ContactItem';
 import { Contacts, ContactToAdd } from './ContactsList.styled';
 

@@ -1,6 +1,4 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-
 import { FinderWrapper, PlaceHolder, Finder } from './Filter.styled';
 
 export default function Filter({ value, onChange }) {
