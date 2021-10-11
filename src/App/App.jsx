@@ -1,4 +1,5 @@
 import 'normalize.css';
+import 'index.css';
 
 import shortid from 'shortid';
 
@@ -72,7 +73,7 @@ class App extends Component {
   };
 
   render() {
-    const { filter } = this.state;
+    const { contacts, filter } = this.state;
     const visibleContacts = this.getVisibleContacts();
 
     return (
@@ -87,10 +88,12 @@ class App extends Component {
           value={filter}
           onChange={e => this.handleFilter(e.target.value)}
         />
-        <ContactsList
-          contacts={visibleContacts}
-          onDeleteContact={this.deleteContact}
-        />
+        {contacts !== [] && (
+          <ContactsList
+            contacts={visibleContacts}
+            onDeleteContact={this.deleteContact}
+          />
+        )}
       </Container>
     );
   }
