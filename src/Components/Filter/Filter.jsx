@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import { FinderWrapper, PlaceHolder, Finder } from './Filter.styled';
 
-export default function Filter({ value, onChange, onBlur }) {
+export default function Filter({ value, onChange }) {
   return (
     <FinderWrapper>
       <PlaceHolder>
         Find contacts by name
-        <Finder type="text" value={value} onChange={onChange} onBlur={onBlur} />
+        <Finder type="text" value={value} onChange={onChange} />
       </PlaceHolder>
     </FinderWrapper>
   );

@@ -4,7 +4,6 @@ import shortid from 'shortid';
 
 import { Component } from 'react';
 
-// import contacts from 'constants';
 import { Container, Heading, Title } from './App.styled';
 import ContactForm from 'Components/ContactForm/ContactForm';
 import Filter from 'Components/Filter/Filter';
@@ -12,28 +11,23 @@ import ContactsList from 'Components/ContactsList/ContactsList';
 
 class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
     filter: '',
   };
 
   componentDidMount() {
-    const contacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(contacts);
-
+    const localStorageData = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(localStorageData);
+    console.log(parsedContacts);
     if (parsedContacts) {
-      this.setState({ contacts: parsedContacts });
+      this.setState({ contacts: [...this.state.contacts, ...parsedContacts] });
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_, prevState) {
     const { contacts } = this.state;
 
-    if (contacts !== prevState) {
+    if (contacts !== prevState.contacts) {
       localStorage.setItem('contacts', JSON.stringify(contacts));
     }
   }
@@ -66,13 +60,16 @@ class App extends Component {
 
   getVisibleContacts = () => {
     const { contacts, filter } = this.state;
+    console.log(contacts);
     const normalizedFilter = filter.toLowerCase();
+    console.log(normalizedFilter);
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter),
     );
   };
 
   deleteContact = contactId => {
+    console.log(contactId);
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== contactId),
     }));
@@ -93,7 +90,6 @@ class App extends Component {
           type="text"
           value={filter}
           onChange={e => this.handleFilter(e.target.value)}
-          onBlur={() => this.handleBlur('')}
         />
         <ContactsList
           contacts={visibleContacts}
